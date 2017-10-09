@@ -18,11 +18,11 @@ def openFilesFunc():
             textfile.close()
             'need rangeInitial[2] to find the range'
             rangeInitial = re.search("(range = )(\d{3})?", filetext)
-            print('rangeInitial:',rangeInitial)
             rangeInitial = str(rangeInitial[2])
             print('rangeInitial[2]:',rangeInitial)
             'increase rangeInital by 1/3 and removes .0 from rangeFinal'
             rangeFinal = str((int(rangeInitial)/3)+int(rangeInitial)).split('.')[0]
+            print(rangeFinal)
             
             with fileinput.FileInput(file, inplace=True) as file:
                 for line in file:
