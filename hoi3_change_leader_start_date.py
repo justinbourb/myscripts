@@ -14,12 +14,15 @@ import os, sys, fileinput
 
 'open all files in the directory and change rank 1 start to 1930'
 def openFilesFunc():
-    os.chdir('C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron 3\history\leaders')
+    os.chdir(r'D:\Python36-32\MyScripts\test')
     years = ['1937','1938','1939','1940','1941','1942','1943','1944','1945','1946']
     for year in years:
-        for file in os.listdir('.'):
-            with fileinput.FileInput(file, inplace=True) as file:
-                for line in file:
-                    print(line.replace(year+'.1.1 = { rank = 1 }', '1930.1.1 = { rank = 1 }'), end='')
- 
+        try:
+            for file in os.listdir('.'):
+                with fileinput.FileInput(file, inplace=True) as file:
+                    for line in file:
+                        print(line.replace(year+'.1.1 = { rank = 1 }', '1930.1.1 = { rank = 1 }'), end='')
+        except:
+            continue
+
 openFilesFunc()
