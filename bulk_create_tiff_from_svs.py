@@ -11,8 +11,12 @@ def openFilesFunc():
     #os.chdir(r'D:\Python36-32\Myscripts\test')
 	os.chdir(r'/home/jb/myscripts/test')
 	for file in os.listdir('.'):
-		slide = openslide.OpenSlide(file)
-		slide.get_thumbnail((5000,5000))
-
+		try:		
+			slide = openslide.OpenSlide(file)
+			thumbnail = slide.get_thumbnail((5000,5000))
+			thumbnail.save(file+".thumbnail","tiff")
+			slide.close()
+		except:
+			continue
 
 openFilesFunc()
