@@ -13,7 +13,7 @@ def openFilesFunc():
 	for dirpath, dirnames, filenames in os.walk('.'):
 		for file in filenames:
 			path= dirpath+"/"+file
-			newName=dirpath.split('/')[1]+'.'+dirpath.split('/')[2]+'.'+file.split('.')[0]
+			newName=dirpath.split('/')[1]+'.'+dirpath.split('/')[2]+'.'+file.split('.')[0]+'.tiff'
 			try:		
 				slide = openslide.OpenSlide(path)
 				thumbnail = slide.get_thumbnail((5000,5000))
