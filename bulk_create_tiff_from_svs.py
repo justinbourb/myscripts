@@ -10,13 +10,16 @@ def openFilesFunc():
     #os.chdir(r'I:\images\need_qc\need_recuts\need_recuts_archive')
     #os.chdir(r'D:\Python36-32\Myscripts\test')
 	os.chdir(r'/home/jb/myscripts/test')
-	for file in os.listdir('.'):
-		try:		
-			slide = openslide.OpenSlide(file)
-			thumbnail = slide.get_thumbnail((5000,5000))
-			thumbnail.save(file+".thumbnail","tiff")
-			slide.close()
-		except:
-			continue
+	for dirpath, dirnames, filenames in os.walk('.'):
+		for file in filenames:
+			path= dirpath+"/"+file
+			newName=dirpath.split('/')[1]+'.'+dirpath.split('/')[2]+'.'+file.split('.')[0]
+			try:		
+				slide = openslide.OpenSlide(path)
+				thumbnail = slide.get_thumbnail((5000,5000))
+				thumbnail.save(newName,"tiff")
+				slide.close()
+			except:
+				continue
 
 openFilesFunc()
