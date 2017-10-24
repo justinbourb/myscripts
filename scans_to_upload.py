@@ -1,21 +1,28 @@
-'''scan_to_upload.py moves .svs files from upload folder
+#scan_to_upload.py
+#10/24/17 written by and copyright Justin Bourbonniere
+'''moves files from upload folder
 into Order#### folders based on the order numbers of files present in folder.
-If the folder exists - move the files.  If no folder exists - create it then
-move the files
+First checks if folder exists - if not create it then
+move the files to the correct folder.
+'''
 
-This is a remake of an already working program that was lost due to
-laptop hard drive failure'''
-
-
-#TODO: regex to find files
-#(/n/n/n/n)(.*).svs
-
-#TODO: create folders
-#order number = regex(1)
-#if not folder Order%s, %order number
-#create folder Order%s, %order number
-
-#TODO: moves files to folder
-#for files in folder
-#if Order#### = ####.svs
-#move file to folder
+import os
+def createFoldersFunc():
+	os.chdir(r'/home/jb/myscripts/test_move')
+	for dirpath, dirnames, filenames in os.walk('.'):
+		for file in filenames:
+			folderName = 'Order'+file.split('$')[0]
+			'''create folders based on order number from files names'''
+			if not os.path.exists(folderName):
+				os.makedirs(folderName)
+def moveFilesFunc():
+	for dirpath, dirnames, filenames in os.walk('.'):
+		for file in filenames:
+			for folders in dirnames:
+				'''if order # from file == order # from the folders then move the file to the folder'''
+				if file.split('$')[0] == folders.split('r')[2]:
+					os.rename('/home/jb/myscripts/test_move/'+file, folders+'/'+file)
+createFoldersFunc()
+moveFilesFunc()
+				
+			
