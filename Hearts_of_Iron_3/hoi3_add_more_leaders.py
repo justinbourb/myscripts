@@ -1,10 +1,22 @@
 #hoi3_add_more_leaders.py
 #11/5/17 written by and copyright Justin Bourbonniere
-'''This program will open the files, find all the leader_ids (from donor files)
-based on regex match and change the number to follow receipient file
-fformat'''
-#reasoning: makes the file structure more organized and easier to find
-#each coutries territories
+'''This program will:
+1)open the "source" file and find the next leader_id to us and
+the "source" file country name
+2) Open all the files in the "donor" directory.  Find and replace
+their leader id #'s with the next leader_id number (next leader_id number
+incremented +1 each time).  It will also update the country name from
+whatever it is to the source country name.
+3) It will append the updated donor file to the source file, thus adding
+more leaders to the source file (objective of the program).'''
+#reasoning: Major nations have upto 900 leaders.  Minor nations have 10-60.
+#I would like to combine minor nation leader lists of countries with
+#similar leader naming conventions to increase the number of minor nation
+#leaders without giving the nations leaders which are too powerful/skilled.
+#I prefer this method to just creating new leader from scratch.  I don't want
+#to create new names (need name generator) and I don't want to make leaders
+#which are overpowered / too powerful / too skilled which seems likely to
+#happen.  Though perhaps random leader generator is a better approach.
 import os, sys, fileinput, re
 
 
