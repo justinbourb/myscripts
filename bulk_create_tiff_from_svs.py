@@ -9,7 +9,7 @@ import os, openslide
 def openFilesFunc():
     #os.chdir(r'I:\images\need_qc\need_recuts\need_recuts_archive')
     #os.chdir(r'D:\Python36-32\Myscripts\test')
-	os.chdir(r'/home/jb/myscripts/test')
+	os.chdir(r'/media/raid/images/A_Need_QC/Archives')
 	for dirpath, dirnames, filenames in os.walk('.'):
 		for file in filenames:
 			path= dirpath+"/"+file
