@@ -23,7 +23,7 @@ import os, sys, fileinput, re, string
 def source_id_Func(source_id):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\source"
-    text_to_search = r"(\d{6})"
+    text_to_search = r"(\d{6} )"
 
 
     'opens and reads file'
@@ -47,7 +47,7 @@ def source_id_Func(source_id):
 def donor_file_Func(source_id):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\donor"
-    text_to_search = r"(\d{5,6})"
+    text_to_search = r"(\d{5,6} )"
     keys=[]
     values=[]
     source_id=int(source_id)
@@ -67,11 +67,12 @@ def donor_file_Func(source_id):
             match = list(set(match))
             'sorts the list, sets are not sorted'
             match.sort()
-            print(file+'pre-match:',match)
+            'replaces the matched leader_id with next source_id'
+            'TODO: write this to the file somehow?'
             for i,s in enumerate(match):
-                match[i]=string.replace(match, match[i], source_id,1)
+                print(source_id)
+                match[i]=source_id
                 source_id+=1
-            print(file+'post-match:',match)
             'store values for dict creation'
             keys.append(str(file))
             values.append(match[1])
