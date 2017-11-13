@@ -96,7 +96,7 @@ def donor_file_Func(source_id):
         for file in os.listdir down to except : continue
         should be a new function called text_replace_Func()
         This function takes two arguements (text_to_search, text_to_replace)
-        How do I handle the interation of source_id I I make a function that does not
+        How do I handle the interation of source_id if I make a function that does not
         include this??  The second time I run the function I don't need that counter.
         Maybe ask Dana?
         TODO: return source file country name from source_id_Func instead of hard coding it
