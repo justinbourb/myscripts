@@ -8,7 +8,11 @@ their leader id #'s with the next leader_id number (next leader_id number
 incremented +1 each time).  It will also update the country name from
 whatever it is to the source country name.
 3) It will append the updated donor file to the source file, thus adding
-more leaders to the source file (objective of the program).'''
+more leaders to the source file (objective of the program).
+4) Optional objective: backfill the donor files with the updated source file content
+but change the leader id's and country name to the donor file format.
+TODO: make a dictionary to contain donor file: leader_id.  Can find both
+leader_id and country name (from file name) with this information.'''
 #reasoning: Major nations have upto 900 leaders.  Minor nations have 10-60.
 #I would like to combine minor nation leader lists of countries with
 #similar leader naming conventions to increase the number of minor nation
