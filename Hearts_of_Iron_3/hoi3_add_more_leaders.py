@@ -1,7 +1,7 @@
 #hoi3_add_more_leaders.py
 #11/5/17 written by and copyright Justin Bourbonniere
 '''This program will:
-1)open the "source" file and find the next leader_id to us and
+1)open the "source" file and find the next leader_id to use and
 the "source" file country name
 2) Open all the files in the "donor" directory.  Find and replace
 their leader id #'s with the next leader_id number (next leader_id number
@@ -75,40 +75,68 @@ def donor_file_Func(source_id):
             ''' this sounds cool: https://stackoverflow.com/questions/15175142/how-can-i-do-multiple-substitutions-using-regex-in-python
             but I'm just going to repeat my code instead. Lazy/Bad_code_warning=True'''
 
-
-
-            '''creates a list from the regex matches (leader_id)'
-            'from the donor file'
-            text_to_find = re.findall(text_to_search, filetext)
-            'removes duplicates from the list, sets do not have duplicates'
-            text_to_find = list(set(text_to_find))
-            'sorts the list, sets are not sorted'
-            text_to_find.sort()
-            'replaces the matched leader_id with next source_id'
-            'TODO: write this to the file somehow?'
-            for i,s in enumerate(text_to_find):
-                text_to_replace = str(source_id)+" ="
-                for line in fileinput.input(file, inplace=True):
-                    print line.replace(str(text_to_find[i])+" =",text_to_replace )
-                source_id+=1
-            'store values for dict creation'
-            '''
-            keys.append(str(file))
-            values.append(text_to_find[1])
-
-
-
-
         except:
             continue
-    'create dictionary to allow backfilling donor files with combined'
-    'source file data'
-    dictionary = dict(zip(keys, values))
-    print(dictionary)
+    for file in os.listdir('.'):
+        try:
+            textfile = open(file, 'r')
+            filetext = textfile.read()
+            textfile.close()
+            for line in fileinput.input(file, inplace=True):
+                line = re.sub(country_name, "country = PER", line.rstrip())
+                print(line)
+                line_counter+=1
+        except:
+            continue
+        '''I think I should refactor this into it's own function.
+        for file in os.listdir down to except : continue
+        should be a new function called text_replace_Func()
+        This function takes two arguements (text_to_search, text_to_replace)
+        How do I handle the interation of source_id I I make a function that does not
+        include this??  The second time I run the function I don't need that counter.
+        Maybe ask Dana?
+        TODO: return source file country name from source_id_Func instead of hard coding it
+        in donor_file_Func to make my program more DRY
+        TODO: return source file path from source_id_Func, instead of finding it again
+        in append_files_Func to make my program more DRY'''
     return ()
 
+def append_files_Func():
+    '''TODO: fill out this function, replace example code with relevant information
+    'f would be source file'
+    f = open("bigfile.txt", "w")
+    'tempfile would be the donor files'
+    for tempfile in tempfiles:
+        f.write(tempfile.read()
+    return()'''
+
+if __name__ == "__main__":
+    source_id=''
+    source_id=source_id_Func(source_id)
+    donor_file_Func(source_id)
 
 
-source_id=''
-source_id=source_id_Func(source_id)
-donor_file_Func(source_id)
+'''creates a list from the regex matches (leader_id)'
+'from the donor file'
+text_to_find = re.findall(text_to_search, filetext)
+'removes duplicates from the list, sets do not have duplicates'
+text_to_find = list(set(text_to_find))
+'sorts the list, sets are not sorted'
+text_to_find.sort()
+'replaces the matched leader_id with next source_id'
+'TODO: write this to the file somehow?'
+for i,s in enumerate(text_to_find):
+    text_to_replace = str(source_id)+" ="
+    for line in fileinput.input(file, inplace=True):
+        print line.replace(str(text_to_find[i])+" =",text_to_replace )
+    source_id+=1
+'store values for dict creation'
+
+keys.append(str(file))
+values.append(text_to_find[1])
+
+'create dictionary to allow backfilling donor files with combined'
+'source file data'
+dictionary = dict(zip(keys, values))
+print(dictionary)
+'''
