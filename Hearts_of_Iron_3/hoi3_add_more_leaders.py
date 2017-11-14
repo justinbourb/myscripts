@@ -23,28 +23,40 @@ leader_id and country name (from file name) with this information.'''
 #happen.  Though perhaps random leader generator is a better approach.
 import os, sys, fileinput, re, string
 
+def oslistdir_and_match_text_Func(text_to_search):
+        for file in os.listdir('.'):
+            try:
+                textfile = open(file, 'r')
+                filetext = textfile.read()
+                textfile.close()
+                'find regex match (leader_id)'
+                match = re.findall(text_to_search, filetext)
+            except:
+                    continue
+        return(match)
+
+def fileinput_replace_text_Func(text_to_search, text_to_replace):
+    for file in os.listdir('.'):
+        try:
+            for line in fileinput.input(file, inplace=True):
+                line = re.sub(text_to_search, text_to_replace, line.rstrip())
+                print(line)
+        except:
+            continue
+    return()
 
 def source_id_Func(source_id):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\source"
     text_to_search = r"(\d{6} )"
-
-
     'opens and reads file'
     os.chdir(path_to_search)
-    for file in os.listdir('.'):
-        try:
-            textfile = open(file, 'r')
-            filetext = textfile.read()
-            textfile.close()
-            'find regex match (leader_id)'
-            match = re.findall(text_to_search, filetext)
-            'returns last leader_id in source file'
-            'can +1 this number to add new leaders'
-            source_id = match[-1]
+    match = oslistdir_and_match_text_Func(text_to_search)
+    'returns last leader_id in source file'
+    'can +1 this number to add new leaders'
+    source_id = match[-1]
 
-        except:
-                continue
+
     return (source_id)
 
 
@@ -52,7 +64,8 @@ def donor_file_Func(source_id):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\donor"
     text_to_search = r"(\d{5,6} )"
-    country_name = r"(country = )([A-Z]{3})"
+    country_to_search = r"(country = )([A-Z]{3})"
+    country_to_replace = "country = PER"
     keys=[]
     values=[]
     source_id=int(source_id)
@@ -63,9 +76,6 @@ def donor_file_Func(source_id):
     os.chdir(path_to_search)
     for file in os.listdir('.'):
         try:
-            textfile = open(file, 'r')
-            filetext = textfile.read()
-            textfile.close()
             for line in fileinput.input(file, inplace=True):
                 text_to_replace = str(source_id)+" "
                 line = re.sub(text_to_search, text_to_replace, line.rstrip())
@@ -81,28 +91,18 @@ def donor_file_Func(source_id):
 
         except:
             continue
-    for file in os.listdir('.'):
-        try:
-            textfile = open(file, 'r')
-            filetext = textfile.read()
-            textfile.close()
-            for line in fileinput.input(file, inplace=True):
-                line = re.sub(country_name, "country = PER", line.rstrip())
-                print(line)
-                line_counter+=1
-        except:
-            continue
-        '''I think I should refactor this into it's own function.
-        for file in os.listdir down to except : continue
-        should be a new function called text_replace_Func()
-        This function takes two arguements (text_to_search, text_to_replace)
-        How do I handle the interation of source_id if I make a function that does not
-        include this??  The second time I run the function I don't need that counter.
-        Maybe ask Dana?
-        TODO: return source file country name from source_id_Func instead of hard coding it
-        in donor_file_Func to make my program more DRY
-        TODO: return source file path from source_id_Func, instead of finding it again
-        in append_files_Func to make my program more DRY'''
+    fileinput_replace_text_Func(country_to_search,country_to_replace)
+    '''I think I should refactor this into it's own function.
+    for file in os.listdir down to except : continue
+    should be a new function called text_replace_Func()
+    This function takes two arguements (text_to_search, text_to_replace)
+    How do I handle the interation of source_id if I make a function that does not
+    include this??  The second time I run the function I don't need that counter.
+    Maybe ask Dana?
+    TODO: return source file country name from source_id_Func instead of hard coding it
+    in donor_file_Func to make my program more DRY
+    TODO: return source file path from source_id_Func, instead of finding it again
+    in append_files_Func to make my program more DRY'''
     return ()
 
 def append_files_Func():
