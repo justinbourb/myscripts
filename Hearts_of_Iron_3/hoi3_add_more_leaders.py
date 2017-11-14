@@ -45,27 +45,30 @@ def fileinput_replace_text_Func(text_to_search, text_to_replace):
             continue
     return()
 
-def source_id_Func(source_id):
+def source_id_Func(source_id,source_country):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\source"
     text_to_search = r"(\d{6} )"
+    country_to_search = r"(country = [A-Z]{3})"
     'opens and reads file'
     os.chdir(path_to_search)
     match = oslistdir_and_match_text_Func(text_to_search)
     'returns last leader_id in source file'
     'can +1 this number to add new leaders'
     source_id = match[-1]
+    match2 = oslistdir_and_match_text_Func(country_to_search)
+    source_country = match2[1]
 
 
-    return (source_id)
+    return (source_id, source_country)
 
 
-def donor_file_Func(source_id):
+def donor_file_Func(source_id,source_country):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\donor"
     text_to_search = r"(\d{5,6} )"
     country_to_search = r"(country = )([A-Z]{3})"
-    country_to_replace = "country = PER"
+    country_to_replace = source_country
     keys=[]
     values=[]
     source_id=int(source_id)
@@ -116,8 +119,9 @@ def append_files_Func():
 
 if __name__ == "__main__":
     source_id=''
-    source_id=source_id_Func(source_id)
-    donor_file_Func(source_id)
+    source_country=''
+    source_id,source_country=source_id_Func(source_id,source_country)
+    donor_file_Func(source_id,source_country)
 
 
 '''creates a list from the regex matches (leader_id)'
