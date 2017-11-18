@@ -33,7 +33,7 @@ def oslistdir_and_match_text_Func(text_to_search):
                 match = re.findall(text_to_search, filetext)
             except:
                     continue
-        return(match)
+        return(match,file)
 
 def fileinput_replace_text_Func(text_to_search, text_to_replace):
     for file in os.listdir('.'):
@@ -43,27 +43,28 @@ def fileinput_replace_text_Func(text_to_search, text_to_replace):
                 print(line)
         except:
             continue
-    return()
+    return(file)
 
-def source_id_Func(source_id,source_country):
+def source_id_Func(source_id,source_country,source_file):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\source"
     text_to_search = r"(\d{6} )"
     country_to_search = r"(country = [A-Z]{3})"
     'opens and reads file'
     os.chdir(path_to_search)
-    match = oslistdir_and_match_text_Func(text_to_search)
+    match,file = oslistdir_and_match_text_Func(text_to_search)
     'returns last leader_id in source file'
     'can +1 this number to add new leaders'
     source_id = match[-1]
     match2 = oslistdir_and_match_text_Func(country_to_search)
-    source_country = match2[1]
+    source_country = list(set(list(match2[0])))[0]
+    source_file = file
 
 
-    return (source_id, source_country)
+    return (source_id, source_country, source_file)
 
 
-def donor_file_Func(source_id,source_country):
+def donor_file_Func(source_id,source_country,donor_files):
     'path and regex definitions'
     path_to_search = r"D:\Python36-32\MyScripts\test\donor"
     text_to_search = r"(\d{5,6} )"
@@ -81,47 +82,40 @@ def donor_file_Func(source_id,source_country):
         try:
             for line in fileinput.input(file, inplace=True):
                 text_to_replace = str(source_id)+" "
-                line = re.sub(text_to_search, text_to_replace, line.rstrip())
-                print(line)
+                new_line = re.sub(text_to_search, text_to_replace, line.rstrip())
+                print(new_line)
                 line_counter+=1
-                '''not 100% accurate but attempts to iterate source_id
-                for every match, not every line'''
-                if (line_counter % 10 == 0):
+                if (line_counter % 10) == 0:
                     source_id+=1
                     line_counter=0
-            ''' this sounds cool: https://stackoverflow.com/questions/15175142/how-can-i-do-multiple-substitutions-using-regex-in-python
-            but I'm just going to repeat my code instead. Lazy/Bad_code_warning=True'''
+
 
         except:
             continue
-    fileinput_replace_text_Func(country_to_search,country_to_replace)
-    '''I think I should refactor this into it's own function.
-    for file in os.listdir down to except : continue
-    should be a new function called text_replace_Func()
-    This function takes two arguements (text_to_search, text_to_replace)
-    How do I handle the interation of source_id if I make a function that does not
-    include this??  The second time I run the function I don't need that counter.
-    Maybe ask Dana?
-    TODO: return source file country name from source_id_Func instead of hard coding it
-    in donor_file_Func to make my program more DRY
-    TODO: return source file path from source_id_Func, instead of finding it again
-    in append_files_Func to make my program more DRY'''
-    return ()
+    file = fileinput_replace_text_Func(country_to_search,country_to_replace)
+    donor_files = file
+    return (donor_files)
 
 def append_files_Func():
-    '''TODO: fill out this function, replace example code with relevant information
-    'f would be source file'
-    f = open("bigfile.txt", "w")
-    'tempfile would be the donor files'
-    for tempfile in tempfiles:
-        f.write(tempfile.read()
-    return()'''
+    '''TODO: refactor to make this dry, shouldn't hardcode path's.
+    feed this function from donor and source functions'''
+    source_file = open(r"D:\Python36-32\MyScripts\test\source\PER.txt", 'w')
+    for file in os.listdir(r"D:\Python36-32\MyScripts\test\donor"):
+        donor_file = open(file, 'r')
+        source_file.write(donor_file.read())
+        donor_file.close()
+    source_file.close()
+    return()
+
 
 if __name__ == "__main__":
     source_id=''
     source_country=''
-    source_id,source_country=source_id_Func(source_id,source_country)
-    donor_file_Func(source_id,source_country)
+    source_file=''
+    donor_files=''
+    source_id,source_country,source_file=source_id_Func(source_id,source_country,source_file)
+    donor_files = donor_file_Func(source_id,source_country, donor_files)
+    append_files_Func()
 
 
 '''creates a list from the regex matches (leader_id)'
