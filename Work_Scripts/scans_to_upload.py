@@ -8,21 +8,32 @@ move the files to the correct folder.
 
 import os
 def createFoldersFunc():
-	os.chdir(r'/home/jb/myscripts/test_move')
 	for dirpath, dirnames, filenames in os.walk('.'):
 		for file in filenames:
 			folderName = 'Order'+file.split('$')[0]
 			'''create folders based on order number from files names'''
-			if not os.path.exists(folderName):
-				os.makedirs(folderName)
+			try:
+				folderName = int(folderName)
+				if not os.path.exists(folderName):
+					os.makedirs(folderName)
+			except:
+				continue
 def moveFilesFunc():
 	for dirpath, dirnames, filenames in os.walk('.'):
 		for file in filenames:
 			for folders in dirnames:
-				'''if order # from file == order # from the folders then move the file to the folder'''
-				if file.split('$')[0] == folders.split('r')[2]:
-					os.rename('/home/jb/myscripts/test_move/'+file, folders+'/'+file)
+				#if order # from file == order # from the folders then move the file to the folder
+
+				try:
+					file_number = int(str(file)[0:4])
+					folder_number=int(str(folders)[5:9])
+					if file_number == folder_number:
+						os.rename('I:/1UploadtoS3/'+file, folders+'/'+file)
+				except:
+					continue
+	return()
+
+upload_path=r'I:/1UploadtoS3'
+os.chdir(upload_path)
 createFoldersFunc()
 moveFilesFunc()
-				
-			
