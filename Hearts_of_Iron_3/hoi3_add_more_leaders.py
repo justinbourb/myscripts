@@ -58,7 +58,6 @@ def copy_data_to_id_Func(copy_data_to_id,copy_data_to_country,copy_data_to_fil, 
     match2 = oslistdir_and_match_text_Func(country_to_search)
     copy_data_to_country = list(set(list(match2[0])))[0]
     copy_data_to_file = file
-    print(file)
 
 
     return (copy_data_to_id, copy_data_to_country, copy_data_to_file)
@@ -68,7 +67,7 @@ def copy_data_from_file_Func(copy_data_to_id,copy_data_to_country,copy_data_from
     'path and regex definitions'
     text_to_search = r"(\d{5,6} )"
     country_to_search = r"(country = )([A-Z]{3})"
-    country_to_replace = "country = "+copy_data_to_country
+    country_to_replace = copy_data_to_country
     keys=[]
     values=[]
     copy_data_to_id=int(copy_data_to_id)
@@ -95,10 +94,10 @@ def copy_data_from_file_Func(copy_data_to_id,copy_data_to_country,copy_data_from
     copy_data_from_files = file
     return (copy_data_from_files)
 
-def append_files_Func(copy_data_to_path_to_search, copy_data_from_path_to_search, copy_data_to_country):
+def append_files_Func(copy_data_to_path_to_search, copy_data_from_path_to_search, copy_data_to_file):
     '''TODO: refactor to make this dry, shouldn't hardcode path's.
     feed this function from copy_data_from and copy_data_to functions'''
-    file_to_open = copy_data_to_path_to_search+"\\"+copy_data_to_country+".txt"
+    file_to_open = copy_data_to_path_to_search+"\\"+copy_data_to_file
     copy_data_to_file = open(file_to_open, 'a')
     for file in os.listdir(copy_data_from_path_to_search):
         copy_data_from_file = open(file, 'r')
@@ -122,7 +121,7 @@ if __name__ == "__main__":
     '''functions to run'''
     copy_data_to_id,copy_data_to_country,copy_data_to_file=copy_data_to_id_Func(copy_data_to_id,copy_data_to_country,copy_data_to_file, copy_data_to_path_to_search)
     copy_data_from_files = copy_data_from_file_Func(copy_data_to_id,copy_data_to_country, copy_data_from_files, copy_data_from_path_to_search)
-    append_files_Func(copy_data_to_path_to_search, copy_data_from_path_to_search, copy_data_to_country)
+    append_files_Func(copy_data_to_path_to_search, copy_data_from_path_to_search, copy_data_to_file)
 
 
 '''creates a list from the regex matches (leader_id)'
@@ -147,3 +146,4 @@ values.append(text_to_find[1])
 dictionary = dict(zip(keys, values))
 print(dictionary)
 '''
+
