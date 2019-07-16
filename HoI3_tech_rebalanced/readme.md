@@ -1,4 +1,5 @@
-These changes are for RandomHoI mod
+These changes are for RandomHoI mod.
+Place files here: Program Files (x86)\Steam\steamapps\common\Hearts of Iron 3\tfh\mod\RandomHoi\technologies
 
 Change Log:
 
