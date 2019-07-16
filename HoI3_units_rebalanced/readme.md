@@ -1,7 +1,7 @@
 Usage:
 
 Place these files (minus the readme.md file) inside this directory (or wherever you have HoI3 installed)
-Program Files (x86)\Steam\steamapps\common\Hearts of Iron 3\tfh\units
+Program Files (x86)\Steam\steamapps\common\Hearts of Iron 3\tfh\units  
 These units may be the same for some mods.
 
 Change Log:
