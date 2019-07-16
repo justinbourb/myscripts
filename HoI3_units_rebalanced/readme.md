@@ -9,3 +9,4 @@ C) All sea units:
   1) decrease build time by 3/5 except for transports (excessive build time reduces playability)
   2) increase battleship and super heavy battleship by an additional 50 days (battleship now matches carrier)
   3) range standardized to 3000
+  
