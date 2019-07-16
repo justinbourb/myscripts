@@ -1,4 +1,5 @@
 Change Log:
+
 A) All land units:
   1) reduce air attack to 0.02 (execpt anti-air units) to improve power of aircaft.
   2) add penalties (if not present) to urban warfare to increase difficulty / time to take cities
