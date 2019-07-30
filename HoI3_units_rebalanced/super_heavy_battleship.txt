@@ -16,7 +16,7 @@ super_heavy_battleship = {
 	#Building Costs
 	build_cost_ic = 10.50
 	build_cost_manpower = 3.00
-	build_time = 400
+	build_time = 300
 	repair_cost_multiplier = 0.05
 
 	#Misc Abilities

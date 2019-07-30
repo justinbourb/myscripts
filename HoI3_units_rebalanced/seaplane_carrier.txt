@@ -1,10 +1,10 @@
-carrier = {
+seaplane_carrier = {
 	type = naval
 	sprite = Carrier
 	capital = yes
-	active = no
+	active = yes
 	
-	hull = 1.0
+	hull = 1.6
 	
 	#Size Definitions
 	max_strength = 100
@@ -12,42 +12,40 @@ carrier = {
 	default_morale = 0.30
 	officers = 0
 
-	carrier_size = 2
+	carrier_size = 1
 
 	#Building Costs
-	build_cost_ic = 7.50
+	build_cost_ic = 6.50
 	build_cost_manpower = 2.50
-	build_time = 210
-	repair_cost_multiplier = 0.05
+	build_time = 160
 
 	#Misc Abilities
-	maximum_speed = 20.00
+	maximum_speed = 18.00
 	transport_capability = 0.00
-	supply_consumption = 1.00
-	fuel_consumption = 1.15
-	range = 3000.00
-	distance = 1.00
-	radio_strength = 1.25
+	supply_consumption = 1.20
+	fuel_consumption = 1.20
+	range = 2500.00
+	distance = 0.90
+	radio_strength = 1.1
 
 	#Detection Abilities
 	surface_detection = 1.00
 	air_detection = 2.00
 	sub_detection = 1.00
-	visibility = 100.00
+	visibility = 90.00
 
 	#Defensive Abilities
-	sea_defence = 3.00
-	air_defence = 3.00
+	sea_defence = 9.00
+	air_defence = 4.00
 
 	#Offensive Abilities
 	convoy_attack = 0.00
 	sea_attack = 0.00
 	sub_attack = 0.00
-	air_attack = 3.00
+	air_attack = 1.00
 	shore_bombardment = 0.00
 
-	completion_size = 3.4
+	completion_size = 1.0
 	on_completion = carrier_practical
-	
-	priority = 10
+	priority = 20
 }

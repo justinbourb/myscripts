@@ -14,7 +14,7 @@ cas = {
 	#Building Costs
 	build_cost_ic = 11.00
 	build_cost_manpower = 1.30
-	build_time = 180
+	build_time = 140
 	repair_cost_multiplier = 0.05
 
 	#Misc Abilities

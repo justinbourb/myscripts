@@ -13,7 +13,7 @@ naval_bomber = {
 	#Building Costs
 	build_cost_ic = 14.00
 	build_cost_manpower = 1.60
-	build_time = 220
+	build_time = 160
 	repair_cost_multiplier = 0.05
 
 	#Misc Abilities

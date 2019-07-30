@@ -14,7 +14,7 @@ strategic_bomber = {
 	#Building Costs
 	build_cost_ic = 17.00
 	build_cost_manpower = 2.00
-	build_time = 300
+	build_time = 210
 	repair_cost_multiplier = 0.05
 
 	#Misc Abilities

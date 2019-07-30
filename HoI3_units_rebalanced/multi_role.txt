@@ -12,7 +12,7 @@ multi_role = {
 	#Building Costs
 	build_cost_ic = 15.00
 	build_cost_manpower = 1.00
-	build_time = 150
+	build_time = 140
 	repair_cost_multiplier = 0.05
 
 	#Misc Abilities
